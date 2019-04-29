@@ -1,5 +1,5 @@
 /**
- * Generic Algorithm to solve The Travelling Salesman Problem.
+ * Genetic Algorithm to solve The Travelling Salesman Problem.
  * Based on Becky Johnson Medium Post with changes on Selection Method.
  * https://medium.com/@becmjo/genetic-algorithms-and-the-travelling-salesman-problem-d10d1daf96a1
  */
