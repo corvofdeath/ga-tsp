@@ -6,16 +6,16 @@
 
 const ga = require('./ga');
 const Population = require('./ga/population');
+const config = require('./config');
 
 let population = new Population();
 population.init();
 
 console.log('Initial distance: ' + population.getFittest().calculateFitness());
-
-console.log("############# Novas Gerações #############");
+console.log('############# Novas Gerações #############');
 // Evolve population for 100 generations
-for (let i = 0; i < 10; i++) {
-	console.log((i + 1) + "º Geração" )
+for (let i = 0; i < config.generations; i++) {
+	console.log(i + 1 + 'º Geração');
 	population = ga.evolve(population);
 }
 
