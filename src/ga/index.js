@@ -99,7 +99,7 @@ function mutate (individual) {
 	// Loop through tour cities
 	for (let cityPos1 = 0; cityPos1 < individual.size(); cityPos1++) {
 		// Apply mutation rate
-		if (Math.random() < mutationRate) {
+		if (Math.random() < config.mutationRate) {
 			console.log('---- Mutação no ' + cityPos1 + 'º gene ----');
 			console.log('Antes: ' + individual.printOnlyCities());
 			// Get a second random position
