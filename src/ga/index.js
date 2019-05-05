@@ -9,6 +9,7 @@ module.exports = {
 	evolve (population) {
 		const newPopulation = new Population();
 
+		console.log("Eletism: " + this.elitism);
 		// elitism
 		let elitismOffSet = 0;
 		if (elitism) {
@@ -16,6 +17,7 @@ module.exports = {
 			elitismOffSet = 1;
 		}
 
+		console.log("############# Crossover #############");
 		// crossover
 		for (let i = elitismOffSet; i < population.size(); i++) {
 			let parent1 = tournamentSelection(population);
@@ -23,6 +25,13 @@ module.exports = {
 
 			let child = crossover(parent1, parent2);
 			newPopulation.add(child);
+
+			console.log("Parente 1");
+			parent1.printOnlyCities();
+			console.log("Parente 2");
+			parent2.printOnlyCities();
+			console.log("Filho");
+			child.printCities();
 		}
 
 		// mutate
@@ -30,11 +39,14 @@ module.exports = {
 			mutate(newPopulation.get(i));
 		}
 
+		console.log("Nova População");
+		console.log(newPopulation.pritnOnylPupaltion());
 		return newPopulation;
 	}
 };
 
 function tournamentSelection (population) {
+	console.log("Torneio");
 	let tournament = new Population();
 
 	for (let i = 0; i < tournamentSize; i++) {
@@ -43,6 +55,9 @@ function tournamentSelection (population) {
 	}
 
 	let best = tournament.getFittest();
+
+	console.log(tournament.pritnOnylPupaltion());
+	console.log("Melhor individuo: " + best.printOnlyCities());
 	return best;
 }
 

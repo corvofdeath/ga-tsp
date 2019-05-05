@@ -40,6 +40,12 @@ class Individual {
 		console.log(this.permutation);
 	}
 
+	printOnlyCities(){
+		const cities = [];
+		this.permutation.forEach(element => cities.push(element.name));
+		return cities;
+	}
+
 	/**
 	 * Calculate the total distance between each city.
 	 * The less value, the better.
