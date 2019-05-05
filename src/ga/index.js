@@ -22,7 +22,9 @@ module.exports = {
 			let parent1 = tournamentSelection(population);
 			let parent2 = tournamentSelection(population);
 
-			if (parent1 == parent2) parent2 = tournamentSelection(population);
+			while (parent1 === parent2) {
+				parent2 = tournamentSelection(population);
+			}
 
 			let child1 = crossover(parent1, parent2);
 			let child2 = crossover(parent1, parent2, true);
