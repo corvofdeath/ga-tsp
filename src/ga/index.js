@@ -17,18 +17,18 @@ module.exports = {
 		console.log('############# Crossover #############');
 		// crossover
 		for (let i = elitismOffSet; i < population.size(); i++) {
+			console.log('---- Torneio ----');
 			let parent1 = tournamentSelection(population);
 			let parent2 = tournamentSelection(population);
 
 			let child = crossover(parent1, parent2);
 			newPopulation.add(child);
 
-			console.log('Parente 1');
-			parent1.printOnlyCities();
-			console.log('Parente 2');
-			parent2.printOnlyCities();
-			console.log('Filho');
-			child.printCities();
+			console.log('\n');
+			console.log('Parente 1: ' + parent1.printOnlyCities());
+			console.log('Parente 2: ' + parent2.printOnlyCities());
+			console.log('Filho: ' + child.printOnlyCities());
+			console.log('\n');
 		}
 
 		// mutate
@@ -38,12 +38,12 @@ module.exports = {
 
 		console.log('Nova População');
 		console.log(newPopulation.pritnOnylPupaltion());
+		console.log('\n');
 		return newPopulation;
 	}
 };
 
 function tournamentSelection (population) {
-	console.log('Torneio');
 	let tournament = new Population();
 
 	for (let i = 0; i < config.tournamentSize; i++) {
