@@ -6,7 +6,8 @@ module.exports = {
 	evolve (population) {
 		const newPopulation = new Population();
 
-		console.log('Eletism: ' + config.elitism);
+		console.log('Eletismo: ' + (config.elitismelitism ? 'Acontece' : 'Não acontece'));
+		console.log('\n');
 		// elitism
 		let elitismOffSet = 0;
 		if (config.elitism) {
