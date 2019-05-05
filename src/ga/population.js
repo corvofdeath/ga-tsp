@@ -1,7 +1,6 @@
 const Individual = require('./individual');
 const shuffle = require('../utils/shuffle');
 const cities = require('../cities').cities;
-const onlyCities = [];
 
 class Population {
 	constructor (individuals) {
@@ -15,15 +14,17 @@ class Population {
 			let individual = new Individual();
 			individual.setCities(shuffle(cities));
 			this.individuals.push(individual);
-		
-			onlyCities.push(individual.printOnlyCities());
 		}
 
 		console.log("############# População inicial #############");
-		console.log(onlyCities);
+		console.log(this.pritnOnylPupaltion());
+		console.log("\n");
 	}
 
 	pritnOnylPupaltion() {
+		const onlyCities = [];
+		this.individuals.forEach(element => onlyCities.push(element.printOnlyCities()));
+
 		return onlyCities;
 	}
 
