@@ -9,7 +9,7 @@ module.exports = {
 	evolve (population) {
 		const newPopulation = new Population();
 
-		console.log("Eletism: " + this.elitism);
+		console.log("Eletismo: " + (elitism? 'Acontece': 'Não acontece'));
 		console.log("\n");
 		// elitism
 		let elitismOffSet = 0;
