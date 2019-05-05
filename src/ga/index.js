@@ -6,7 +6,7 @@ module.exports = {
 	evolve (population) {
 		const newPopulation = new Population();
 
-		console.log('Eletismo: ' + (config.elitismelitism ? 'Acontece' : 'Não acontece'));
+		console.log('Eletismo: ' + (config.elitism ? 'Acontece' : 'Não acontece'));
 		console.log('\n');
 		// elitism
 		let elitismOffSet = 0;
@@ -21,6 +21,8 @@ module.exports = {
 			console.log('---- Torneio ----');
 			let parent1 = tournamentSelection(population);
 			let parent2 = tournamentSelection(population);
+
+			if (parent1 == parent2) parent2 = tournamentSelection(population);
 
 			let child1 = crossover(parent1, parent2);
 			let child2 = crossover(parent1, parent2, true);
