@@ -2,6 +2,7 @@ const Individual = require('./individual');
 const shuffle = require('../utils/shuffle');
 const cities = require('../cities').cities;
 const config = require('../config');
+
 const onlyCities = [];
 
 class Population {
@@ -31,7 +32,6 @@ class Population {
 	getFittest () {
 		let best;
 		for (let i = 0; i < this.individuals.length - 1; i++) {
-			console.log(i);
 			const actual = this.individuals[i];
 			const next = this.individuals[i + 1];
 
