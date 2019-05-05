@@ -36,7 +36,7 @@ module.exports = {
 			mutate(newPopulation.get(i));
 		}
 
-		console.log('Nova População');
+		console.log('---- Nova População ----');
 		console.log(newPopulation.pritnOnylPupaltion());
 		console.log('\n');
 		return newPopulation;
@@ -99,10 +99,12 @@ function mutate (individual) {
 	// Loop through tour cities
 	for (let cityPos1 = 0; cityPos1 < individual.size(); cityPos1++) {
 		// Apply mutation rate
-		if (Math.random() < config.mutationRate) {
+		if (Math.random() < mutationRate) {
+			console.log('---- Mutação no ' + cityPos1 + 'º gene ----');
+			console.log('Antes: ' + individual.printOnlyCities());
 			// Get a second random position
 			let cityPos2 = Math.floor(individual.size() * Math.random());
-
+			console.log('Troca: ' + individual.getCity(cityPos1).name + ' com ' + individual.getCity(cityPos2).name);
 			// Get the cities at target position
 			let city1 = individual.getCity(cityPos1);
 			let city2 = individual.getCity(cityPos2);
@@ -110,6 +112,8 @@ function mutate (individual) {
 			// Swap
 			individual.setCity(cityPos2, city1);
 			individual.setCity(cityPos1, city2);
+			console.log('Depois: ' + individual.printOnlyCities());
+			console.log('\n');
 		}
 	}
 }
