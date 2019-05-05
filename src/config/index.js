@@ -1,7 +1,7 @@
 module.exports = {
-	populationSize : 8,
+	populationSize : 25,
 	mutationRate   : 0.015,
 	tournamentSize : 5,
-	elitism        : false,
+	elitism        : true,
 	generations    : 5
 };

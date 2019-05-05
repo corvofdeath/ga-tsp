@@ -19,7 +19,6 @@ for (let i = 0; i < config.generations; i++) {
 	population = ga.evolve(population);
 }
 
-console.log('Initial distance: ' + population.getFittest().calculateFitness());
 console.log('Final distance: ' + population.getFittest().calculateFitness());
 console.log('Solution:');
 population.printIndividuals();
