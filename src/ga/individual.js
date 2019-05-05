@@ -40,7 +40,7 @@ class Individual {
 		console.log(this.permutation);
 	}
 
-	printOnlyCities(){
+	printOnlyCities () {
 		const cities = [];
 		this.permutation.forEach(element => cities.push(element.name));
 		return cities;

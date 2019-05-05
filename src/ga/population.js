@@ -30,12 +30,10 @@ class Population {
 	}
 
 	getFittest () {
-		let best;
-		for (let i = 0; i < this.individuals.length - 1; i++) {
-			const actual = this.individuals[i];
-			const next = this.individuals[i + 1];
+		let best = this.individuals[0];
 
-			if (actual.calculateFitness() <= next.calculateFitness()) best = actual;
+		for (let i = 1; i < this.individuals.length; i++) {
+			if (best.calculateFitness() <= this.individuals[i].calculateFitness()) best = this.individuals[i];
 		}
 
 		return best;
