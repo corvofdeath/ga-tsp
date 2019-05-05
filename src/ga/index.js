@@ -1,9 +1,6 @@
 const Population = require('./population');
 const Individual = require('./individual');
-
-const mutationRate = 0.015;
-const tournamentSize = 5;
-const elitism = true;
+const config = require('../config');
 
 module.exports = {
 	evolve (population) {
@@ -11,7 +8,7 @@ module.exports = {
 
 		// elitism
 		let elitismOffSet = 0;
-		if (elitism) {
+		if (config.elitism) {
 			newPopulation.add(population.getFittest());
 			elitismOffSet = 1;
 		}
@@ -37,12 +34,13 @@ module.exports = {
 function tournamentSelection (population) {
 	let tournament = new Population();
 
-	for (let i = 0; i < tournamentSize; i++) {
+	for (let i = 0; i < config.tournamentSize; i++) {
 		let random = Math.floor(Math.random() * population.size());
 		tournament.add(population.get(random));
 	}
 
 	let best = tournament.getFittest();
+
 	return best;
 }
 
@@ -87,7 +85,7 @@ function mutate (individual) {
 	// Loop through tour cities
 	for (let cityPos1 = 0; cityPos1 < individual.size(); cityPos1++) {
 		// Apply mutation rate
-		if (Math.random() < mutationRate) {
+		if (Math.random() < config.mutationRate) {
 			// Get a second random position
 			let cityPos2 = Math.floor(individual.size() * Math.random());
 

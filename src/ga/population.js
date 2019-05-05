@@ -1,6 +1,7 @@
 const Individual = require('./individual');
 const shuffle = require('../utils/shuffle');
 const cities = require('../cities').cities;
+const config = require('../config');
 
 class Population {
 	constructor (individuals) {
@@ -10,7 +11,7 @@ class Population {
 
 	// a random start point
 	init () {
-		for (let i = 0; i < 8; i++) {
+		for (let i = 0; i < config.populationSize; i++) {
 			let individual = new Individual();
 			individual.setCities(shuffle(cities));
 			this.individuals.push(individual);
@@ -20,6 +21,7 @@ class Population {
 	getFittest () {
 		let best;
 		for (let i = 0; i < this.individuals.length - 1; i++) {
+			console.log(i);
 			const actual = this.individuals[i];
 			const next = this.individuals[i + 1];
 
