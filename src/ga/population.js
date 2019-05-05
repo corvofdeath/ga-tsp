@@ -43,6 +43,13 @@ class Population {
 		return best;
 	}
 
+	getTotalDistance () {
+		let sum = 0;
+		this.individuals.forEach(e => (sum = sum + e.calculateFitness()));
+
+		return sum;
+	}
+
 	size () {
 		return this.individuals.length;
 	}

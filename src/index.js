@@ -10,8 +10,9 @@ const config = require('./config');
 
 let population = new Population();
 population.init();
+const initialDistance = population.getFittest().calculateFitness();
 
-console.log('Initial distance: ' + population.getFittest().calculateFitness());
+console.log('Initial distance: ' + initialDistance);
 console.log('############# Novas Gerações #############');
 // Evolve population for 100 generations
 for (let i = 0; i < config.generations; i++) {
@@ -19,6 +20,7 @@ for (let i = 0; i < config.generations; i++) {
 	population = ga.evolve(population);
 }
 
+console.log('Initial distance: ' + initialDistance);
 console.log('Final distance: ' + population.getFittest().calculateFitness());
 console.log('Solution:');
 population.printIndividuals();

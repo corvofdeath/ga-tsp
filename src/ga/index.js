@@ -19,8 +19,12 @@ module.exports = {
 		// crossover
 		for (let i = elitismOffSet; i < population.size() / 2; i++) {
 			console.log('---- Torneio ----');
-			let parent1 = tournamentSelection(population);
-			let parent2 = tournamentSelection(population);
+
+			// const { parent1, parent2 } = tournamentSelection(population);
+			const { parent1, parent2 } = wheelRoulette(population);
+
+			//let parent1 = tournamentSelection(population);
+			//let parent2 = tournamentSelection(population);
 
 			let child1 = crossover(parent1, parent2);
 			let child2 = crossover(parent1, parent2, true);
@@ -60,11 +64,47 @@ function tournamentSelection (population) {
 		tournament.add(population.get(random));
 	}
 
-	let best = tournament.getFittest();
+	// let best = tournament.getFittest();
+	let { parent1, parent2 } = wheelRoulette(tournament);
 
 	console.log(tournament.pritnOnylPupaltion());
-	console.log('Melhor individuo: ' + best.printOnlyCities());
-	return best;
+	// console.log('Melhor individuo: ' + best.printOnlyCities());
+
+	return { parent1, parent2 };
+}
+
+function wheelRoulette (population) {
+	const overallSum = population.getTotalDistance();
+
+	// probability array 0 to 1
+	const probs = [];
+
+	for (let i = 0; i < population.size(); i++) {
+		probs.push(population.get(i).calculateFitness());
+	}
+
+	const parent1 = population.get(wheelRouletteSelectionParent(probs));
+	let parent2 = population.get(wheelRouletteSelectionParent(probs));
+
+	if (parent1 === parent2) parent2 = population.get(wheelRouletteSelectionParent(probs));
+
+	return { parent1, parent2 };
+}
+
+function wheelRouletteSelectionParent (probs) {
+	// sum each probability with this predecessor
+	const randomSelection = Math.random();
+	for (let i = 1; i < probs.length - 1; i++) {
+		probs[i] = probs[i - 1] + probs[i];
+	}
+
+	for (let i = 0; i < probs.length - 1; i++) {
+		if (randomSelection >= probs[i] && randomSelection <= probs[i + 1]) {
+			return i;
+		}
+	}
+
+	return probs.length - 1;
 }
 
 function crossover (parent1, parent2, invert = false) {
