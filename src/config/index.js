@@ -3,5 +3,5 @@ module.exports = {
 	mutationRate   : 0.015,
 	tournamentSize : 5,
 	elitism        : true,
-	generations    : 5
+	generations    : 50
 };
