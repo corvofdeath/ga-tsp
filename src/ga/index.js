@@ -3,7 +3,7 @@ const Individual = require('./individual');
 const config = require('../config');
 
 module.exports = {
-	evolve (population) {
+	evolve(population) {
 		const newPopulation = new Population();
 
 		console.log('Eletismo: ' + (config.elitism ? 'Acontece' : 'Não acontece'));
@@ -17,26 +17,18 @@ module.exports = {
 
 		console.log('############# Crossover #############');
 		// crossover
-		for (let i = elitismOffSet; i < population.size() / 2; i++) {
+		for (let i = elitismOffSet; i < population.size(); i++) {
 			console.log('---- Torneio ----');
 			let parent1 = tournamentSelection(population);
 			let parent2 = tournamentSelection(population);
 
-			let child1 = crossover(parent1, parent2);
-			let child2 = crossover(parent1, parent2, true);
-
-			if (config.populationSize - newPopulation.size() == 1) {
-				newPopulation.add(child1);
-			} else {
-				newPopulation.add(child1);
-				newPopulation.add(child2);
-			}
+			let child = crossover(parent1, parent2);
+			newPopulation.add(child);
 
 			console.log('\n');
 			console.log('Parente 1: ' + parent1.printOnlyCities());
 			console.log('Parente 2: ' + parent2.printOnlyCities());
-			console.log('Filho 1: ' + child1.printOnlyCities());
-			console.log('Filho 2: ' + child2.printOnlyCities());
+			console.log('Filho: ' + child.printOnlyCities());
 			console.log('\n');
 		}
 
@@ -52,7 +44,7 @@ module.exports = {
 	}
 };
 
-function tournamentSelection (population) {
+function tournamentSelection(population) {
 	let tournament = new Population();
 
 	for (let i = 0; i < config.tournamentSize; i++) {
@@ -67,21 +59,16 @@ function tournamentSelection (population) {
 	return best;
 }
 
-function crossover (parent1, parent2, invert = false) {
+function crossover(parent1, parent2) {
 	let child = new Individual();
 
-	if (!invert) {
-		firstCrossover(parent1, child);
-		secondCrossover(parent2, child);
-	} else {
-		firstCrossover(parent2, child);
-		secondCrossover(parent1, child);
-	}
+	firstCrossover(parent1, child);
+	secondCrossover(parent2, child);
 
 	return child;
 }
 
-function firstCrossover (parent, child) {
+function firstCrossover(parent, child) {
 	let start = Math.floor(Math.random() * parent.size());
 	let end = Math.floor(Math.random() * parent.size());
 
@@ -99,7 +86,7 @@ function firstCrossover (parent, child) {
 	return child;
 }
 
-function secondCrossover (parent, child) {
+function secondCrossover(parent, child) {
 	// parent 2
 	for (let i = 0; i < parent.size(); i++) {
 		// If child doesn't have the city add it
@@ -116,7 +103,7 @@ function secondCrossover (parent, child) {
 	}
 }
 
-function mutate (individual) {
+function mutate(individual) {
 	// Loop through tour cities
 	for (let cityPos1 = 0; cityPos1 < individual.size(); cityPos1++) {
 		// Apply mutation rate
